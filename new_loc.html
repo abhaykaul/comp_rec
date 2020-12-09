@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF92FfNq7wa5XUqf8zCoFzsPi6IstY5Jc&callback=initMap"
+        type="text/javascript"></script>
+    <title> Geolocation API </title>
+    </head>
+<body>
+    <h1>Locatoin Tracer </h1>
+    <button onClick="getLocation()"> Get Location </button>
+    <!--output will go here -->
+    <div id="output"></div>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" ></script>    
+    <script>
+        var x=document.getElementById('output');
+        function getLocation(){
+            if(navigator.geolocation)
+            {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }else{
+                x.innerHTML="browser not working";
+            }
+        }
+        function showPosition(position) {
+          var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+          var img_url = "https://maps.googleapis.com/maps/api/staticmap?center=                           
+          "+latlon+"&zoom=14&size=400x300&sensor=false&key=AIzaSyBF92FfNq7wa5XUqf8zCoFzsPi6IstY5Jc";
+
+          document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
+        }
+    </script>
+</body>
+</html>        

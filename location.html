@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+	  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF92FfNq7wa5XUqf8zCoFzsPi6IstY5Jc&callback=initMap"
+  type="text/javascript"></script>
+	<title> Geolocation API </title>
+	</head>
+<body>
+	<h1>Locatoin Tracer </h1>
+	<button onClick="getLocation()"> Get Location </button>
+	<!--output will go here -->
+	<div id="output"></div>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" ></script>	
+	<script>
+		var x=document.getElementById('output');
+		function getLocation(){
+			if(navigator.geolocation)
+			{
+				navigator.geolocation.getCurrentPosition(showPosition);
+			}else{
+				x.innerHTML="browser not working";
+			}
+		}
+		function showPosition(position)
+		{
+			x.innerHTML="latitude="+position.coords.latitude;
+			x.innerHTML+="<br/>"
+			x.innerHTML+="Longitude="+position.coords.longitude;
+
+			var locAPI="http://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&sensor=true";
+			x.innerHTML=locAPI;
+			$.get({
+				url:locAPI,
+				success: function(data){
+					console.log(data);
+				}
+			})		
+		}
+
+	</script>
+</body>	
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
